@@ -1,96 +1,72 @@
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+@import '@fontsource/montserrat/600.css';
+@import '@fontsource/montserrat/700.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Design System - Diagnóstico Financeiro Landing Page */
+/* Paleta EXATA conforme especificação - cores em HSL */
 
 @layer base {
   :root {
+    /* Cores principais da marca */
+    --azul-profundo: 208 70% 16%;
+    --verde-seguranca: 148 67% 37%;
+    --verde-hover: 148 67% 29%;
+    --cinza-grafite: 0 0% 18%;
+    --cinza-claro: 210 25% 97%;
+    --amarelo-alerta: 45 86% 62%;
+    --branco: 0 0% 100%;
+    
+    /* Mapeamento para tokens semânticos */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    --foreground: 208 70% 16%;
+    
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
+    --card-foreground: 208 70% 16%;
+    
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
+    --popover-foreground: 208 70% 16%;
+    
+    --primary: 148 67% 37%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 148 67% 29%;
+    
+    --secondary: 210 25% 97%;
+    --secondary-foreground: 208 70% 16%;
+    
+    --muted: 210 25% 97%;
+    --muted-foreground: 0 0% 18%;
+    
+    --accent: 45 86% 62%;
+    --accent-foreground: 208 70% 16%;
+    
+    --destructive: 0 0% 0%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 210 20% 90%;
+    --input: 210 20% 90%;
+    --ring: 148 67% 37%;
+    
     --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    
+    /* Tipografia */
+    --font-display: 'Montserrat', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    
+    /* Espaçamentos */
+    --section-padding-mobile: 2rem;
+    --section-padding-desktop: 3rem;
+    --section-gap-mobile: 2.25rem;
+    --section-gap-desktop: 3.5rem;
+    --container-padding-mobile: 1rem;
+    --container-padding-tablet: 3rem;
+    --container-padding-desktop: 7.5rem;
   }
 }
 
@@ -98,8 +74,178 @@ All colors MUST be HSL.
   * {
     @apply border-border;
   }
-
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body antialiased;
+    font-family: var(--font-body);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply font-semibold text-azul-profundo;
+  }
+}
+
+@layer components {
+  /* Container responsivo conforme especificação */
+  .container-custom {
+    @apply w-full mx-auto;
+    max-width: 1200px;
+    padding-left: var(--container-padding-mobile);
+    padding-right: var(--container-padding-mobile);
+  }
+  
+  @media (min-width: 768px) {
+    .container-custom {
+      padding-left: var(--container-padding-tablet);
+      padding-right: var(--container-padding-tablet);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .container-custom {
+      padding-left: var(--container-padding-desktop);
+      padding-right: var(--container-padding-desktop);
+    }
+  }
+  
+  /* Seções com espaçamento vertical */
+  .section {
+    @apply py-8 md:py-12;
+  }
+  
+  .section-gap {
+    @apply mt-9 md:mt-14;
+  }
+  
+  /* Botão CTA principal */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 md:py-3.5 
+           bg-verde-seguranca text-white font-semibold text-base md:text-lg
+           rounded-lg transition-colors duration-200 cursor-pointer
+           hover:bg-verde-hover focus:outline-none focus:ring-2 focus:ring-verde-seguranca focus:ring-offset-2;
+    height: 48px;
+    border-radius: 8px;
+  }
+  
+  @media (min-width: 768px) {
+    .btn-primary {
+      height: 56px;
+    }
+  }
+  
+  /* Botão secundário */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3
+           bg-transparent border-2 border-azul-profundo text-azul-profundo 
+           font-semibold text-base rounded-lg transition-colors duration-200 cursor-pointer
+           hover:bg-azul-profundo hover:text-white;
+    border-radius: 8px;
+  }
+  
+  /* Botão de upsell com amarelo */
+  .btn-upsell {
+    @apply inline-flex items-center justify-center px-6 py-3.5
+           bg-amarelo-alerta text-azul-profundo font-bold text-lg
+           rounded-lg transition-all duration-200 cursor-pointer
+           hover:brightness-95 border-2 border-verde-seguranca;
+    height: 56px;
+    border-radius: 8px;
+  }
+  
+  /* Card padrão */
+  .card-custom {
+    @apply bg-white rounded-xl p-6 md:p-8;
+    box-shadow: 0 4px 6px -1px rgba(13, 43, 69, 0.08), 0 2px 4px -2px rgba(13, 43, 69, 0.04);
+  }
+  
+  /* Badge / selo de confiança */
+  .badge-trust {
+    @apply inline-flex items-center gap-2 px-3 py-1.5 
+           bg-cinza-claro text-cinza-grafite text-sm rounded-full;
+  }
+  
+  /* Input de formulário */
+  .input-custom {
+    @apply w-full px-4 py-3 bg-white border border-border rounded-lg
+           text-cinza-grafite placeholder:text-gray-400
+           focus:outline-none focus:ring-2 focus:ring-verde-seguranca focus:border-transparent
+           transition-all duration-200;
+    height: 48px;
+  }
+  
+  .input-custom:focus {
+    border-color: hsl(var(--verde-seguranca));
+  }
+  
+  /* Select de formulário */
+  .select-custom {
+    @apply w-full px-4 py-3 bg-white border border-border rounded-lg
+           text-cinza-grafite appearance-none cursor-pointer
+           focus:outline-none focus:ring-2 focus:ring-verde-seguranca focus:border-transparent
+           transition-all duration-200;
+    height: 48px;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%232E2E2E' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.75rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+  }
+  
+  /* Label de formulário */
+  .label-custom {
+    @apply block text-sm font-medium text-cinza-grafite mb-1.5;
+  }
+  
+  /* Erro de formulário */
+  .input-error {
+    @apply border-red-500 focus:ring-red-500;
+  }
+  
+  .error-message {
+    @apply text-red-500 text-sm mt-1;
+  }
+  
+  /* Selo de sucesso */
+  .badge-success {
+    @apply inline-flex items-center gap-2 px-4 py-2 
+           bg-verde-seguranca text-white font-semibold rounded-lg;
+  }
+}
+
+@layer utilities {
+  /* Animações sutis */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out;
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
