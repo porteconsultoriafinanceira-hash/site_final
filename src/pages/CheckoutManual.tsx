@@ -14,11 +14,32 @@ const CheckoutManual = () => {
     }
   }, []);
 
-  const handlePayment = () => {
-    // Simular pagamento bem-sucedido
-    localStorage.setItem('manualPaymentStatus', 'success');
-    navigate('/manualpg');
-  };
+ const handlePayment = async () => {
+  try {
+    const response = await fetch(
+      'http://localhost:3333/api/checkout/manual',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    if (data.init_point) {
+      window.location.href = data.init_point;
+    } else {
+      console.error('Resposta inválida:', data);
+      alert('Erro ao iniciar o checkout.');
+    }
+  } catch (error) {
+    console.error('Erro no checkout:', error);
+    alert('Erro ao conectar com o servidor.');
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-cinza-claro flex items-center justify-center p-4">

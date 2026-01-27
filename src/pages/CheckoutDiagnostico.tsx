@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { ShieldCheck, Lock, Eye } from 'lucide-react';
 
 const CheckoutDiagnostico = () => {
-  const navigate = useNavigate();
   const [customerData, setCustomerData] = useState<{ nome: string; email: string } | null>(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const data = localStorage.getItem('diagnosticoData');
@@ -14,23 +13,48 @@ const CheckoutDiagnostico = () => {
     }
   }, []);
 
-  const handlePayment = () => {
-    // Simular pagamento bem-sucedido
-    // Em produção, aqui integraria com Mercado Pago
-    localStorage.setItem('paymentStatus', 'success');
-    navigate('/diagnostico');
+  const handlePayment = async () => {
+    try {
+      setLoading(true);
+
+      const response = await fetch('http://localhost:3333/api/checkout/diagnostico', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nome: customerData?.nome,
+          email: customerData?.email,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.init_point) {
+        window.location.href = data.init_point;
+      } else {
+        alert('Erro ao iniciar pagamento.');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Erro ao conectar com o Mercado Pago.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="min-h-screen bg-cinza-claro flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        {/* Card de checkout */}
         <div className="card-custom animate-fade-in">
+
           {/* Texto de confiança */}
           <div className="text-center mb-6">
             <div className="flex items-center justify-center gap-2 text-verde-seguranca mb-2">
               <ShieldCheck className="w-6 h-6" />
-              <span className="font-semibold">Pagamento seguro processado pelo Mercado Pago</span>
+              <span className="font-semibold">
+                Pagamento seguro processado pelo Mercado Pago
+              </span>
             </div>
             <div className="flex items-center justify-center gap-4 text-sm text-cinza-grafite">
               <span className="flex items-center gap-1">
@@ -44,12 +68,13 @@ const CheckoutDiagnostico = () => {
             </div>
             <p className="text-sm text-cinza-grafite mt-1">Total confidencialidade</p>
           </div>
-          
-          {/* Resumo do pedido */}
+
+          {/* Resumo */}
           <div className="bg-cinza-claro rounded-lg p-4 mb-6">
             <h2 className="font-display font-semibold text-azul-profundo mb-3">
               Resumo do Pedido
             </h2>
+
             <div className="space-y-2 text-sm">
               {customerData && (
                 <>
@@ -63,6 +88,7 @@ const CheckoutDiagnostico = () => {
                   </div>
                 </>
               )}
+
               <div className="border-t border-border pt-2 mt-2">
                 <div className="flex justify-between">
                   <span className="text-cinza-grafite">Produto:</span>
@@ -75,33 +101,20 @@ const CheckoutDiagnostico = () => {
               </div>
             </div>
           </div>
-          
-          {/* Opções de pagamento */}
-          <div className="space-y-3 mb-6">
-            <p className="text-sm font-medium text-cinza-grafite">Formas de pagamento:</p>
-            <div className="grid grid-cols-2 gap-3">
-              <div className="border border-border rounded-lg p-3 text-center bg-background">
-                <p className="font-semibold text-azul-profundo">Pix</p>
-                <p className="text-xs text-cinza-grafite">À vista</p>
-              </div>
-              <div className="border border-border rounded-lg p-3 text-center bg-background">
-                <p className="font-semibold text-azul-profundo">Cartão</p>
-                <p className="text-xs text-cinza-grafite">Até 12x</p>
-              </div>
-            </div>
-          </div>
-          
-          {/* Botão de pagamento */}
+
+          {/* Botão */}
           <button
             onClick={handlePayment}
+            disabled={loading}
             className="btn-primary w-full text-lg"
           >
-            Pagar agora
+            {loading ? 'Redirecionando...' : 'Pagar agora'}
           </button>
-          
+
           <p className="text-xs text-center text-cinza-grafite mt-4">
             Ao clicar em "Pagar agora", você será redirecionado para o ambiente seguro do Mercado Pago.
           </p>
+
         </div>
       </div>
     </div>
