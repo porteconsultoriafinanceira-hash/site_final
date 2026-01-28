@@ -18,6 +18,7 @@ export const createDiagnosticoCheckout = async (_: Request, res: Response) => {
       body: {
         items: [
           {
+            id: "diagnostico-financeiro-001", // ✅ ID adicionado
             title: "Diagnóstico Financeiro",
             quantity: 1,
             unit_price: 27,
@@ -48,6 +49,7 @@ export const createManualCheckout = async (_: Request, res: Response) => {
       body: {
         items: [
           {
+            id: "manual-financeiro-002", // ✅ ID adicionado
             title: "Manual Financeiro Completo",
             quantity: 1,
             unit_price: 167,

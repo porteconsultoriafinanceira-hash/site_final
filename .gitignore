@@ -5,8 +5,9 @@ node_modules/
 .env
 .env.*
 
-# Build do frontend
+# Build do frontend e backend
 dist/
+dist-server/
 
 # Logs
 npm-debug.log*
@@ -15,4 +16,13 @@ pnpm-debug.log*
 
 # Arquivos do sistema
 .DS_Store
+
+# VS Code
+.vscode/
+
+# Testes / coverage
+coverage/
+
+# TypeScript cache
+*.tsbuildinfo
 
