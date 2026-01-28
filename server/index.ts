@@ -2,21 +2,21 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import path from "path";
-import routes from "./routes";
+import routes from "./routes.js"; // 👈 EXTENSÃO OBRIGATÓRIA
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-// 🔹 API
+// API
 app.use("/api", routes);
 
-// 🔹 Frontend (Vite build)
+// Frontend (Vite build)
 const distPath = path.resolve(process.cwd(), "dist");
 app.use(express.static(distPath));
 
-// 🔹 SPA fallback (React Router)
+// SPA fallback
 app.get("*", (_, res) => {
   res.sendFile(path.join(distPath, "index.html"));
 });
