@@ -2,7 +2,7 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import path from "path";
-import routes from "./routes.js"; // 👈 EXTENSÃO OBRIGATÓRIA
+import routes from "./routes";
 
 const app = express();
 
@@ -12,17 +12,21 @@ app.use(express.json());
 // API
 app.use("/api", routes);
 
-// Frontend (Vite build)
+// Frontend buildado
 const distPath = path.resolve(process.cwd(), "dist");
 app.use(express.static(distPath));
 
-// SPA fallback
 app.get("*", (_, res) => {
   res.sendFile(path.join(distPath, "index.html"));
 });
 
-const PORT = process.env.PORT || 3333;
+// ⚠️ IMPORTANTE: Railway exige isso
+const PORT = Number(process.env.PORT);
 
-app.listen(Number(PORT), "0.0.0.0", () => {
-  console.log(`✅ Servidor rodando na porta ${PORT}`);
+if (!PORT) {
+  throw new Error("PORT não definida pelo ambiente");
+}
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 Servidor rodando na porta ${PORT}`);
 });
