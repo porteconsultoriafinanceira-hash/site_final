@@ -3,6 +3,10 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import routes from "./routes.js";
+import fs from "fs";
+
+console.log("📂 Conteúdo do dist:", fs.existsSync("dist"));
+
 
 const app = express();
 
