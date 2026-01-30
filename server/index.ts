@@ -20,13 +20,8 @@ app.get("*", (_, res) => {
   res.sendFile(path.join(distPath, "index.html"));
 });
 
-// ⚠️ IMPORTANTE: Railway exige isso
-const PORT = Number(process.env.PORT);
+const PORT = process.env.PORT || 3000;
 
-if (!PORT) {
-  throw new Error("PORT não definida pelo ambiente");
-}
-
-app.listen(PORT, "0.0.0.0", () => {
+app.listen(Number(PORT), "0.0.0.0", () => {
   console.log(`🚀 Servidor rodando na porta ${PORT}`);
 });
