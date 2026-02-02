@@ -1,0 +1,12 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "services": [
+    {
+      "name": "web",
+      "startCommand": "npm start",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  ]
+}
