@@ -5,7 +5,8 @@ import path from "path";
 import routes from "./routes.js";
 import fs from "fs";
 
-console.log("📂 Conteúdo do dist:", fs.existsSync("dist"));
+console.log("📂 dist existe?", fs.existsSync("dist"));
+console.log("📄 index.html existe?", fs.existsSync("dist/index.html"));
 
 
 const app = express();
