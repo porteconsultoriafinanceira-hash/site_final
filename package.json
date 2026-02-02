@@ -3,15 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "scripts": {
-    "dev": "concurrently \"vite\" \"tsx server/index.ts\"",
-    "build:server": "tsc -p tsconfig.server.json",
-    "build": "vite build && ls -la dist && npm run build:server",
-    "start": "node dist-server/index.js",
-    "preview": "vite preview",
-    "lint": "eslint .",
-    "test": "vitest run",
-    "postinstall": "npm run build"
+"scripts": {
+  "dev": "concurrently \"vite\" \"tsx server/index.ts\"",
+  "build:server": "tsc -p tsconfig.server.json",
+  "build": "vite build && npm run build:server",
+  "start": "node dist-server/index.js",
+  "lint": "eslint .",
+  "test": "vitest run"
+}
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.8",
